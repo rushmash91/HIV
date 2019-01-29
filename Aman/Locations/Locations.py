@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Created on Wed Jan 30 00:35:27 2019
 
-This is a temporary script file.
+@author: Aman Jain
 """
 
 import pandas as pd
