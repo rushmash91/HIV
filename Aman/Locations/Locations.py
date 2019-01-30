@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jan 30 00:35:27 2019
+Spyder Editor
 
-@author: Aman Jain
+This is a temporary script file.
 """
 
 import pandas as pd
@@ -94,7 +94,7 @@ for i in range(len(dataset2)):
         if(j=='surat'):
             surat=surat+1
             break
-        if(j=='mangalore'):
+        if(j=='mangalore' or j=='mangaluru'):
             mangalore=mangalore+1
             break
         if(j=='nagpur'):
