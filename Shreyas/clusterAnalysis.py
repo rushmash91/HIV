@@ -28,6 +28,7 @@ data_list = []
 for i in data_file_dirs:
     data_list.append(pd.read_csv(args.path+"/"+i, error_bad_lines=False))
 
+
 # Creatng a dataset with the combined titles of all the above datasets. Will be used for clustering
 # I dropped the article column as most of the dataset have it incomplete
 frames = [i["Title"] if "\tTitle" not in i else i["\tTitle"] for i in data_list]
@@ -41,17 +42,17 @@ df6 = df6[~df6.isnull()]
 df6.reset_index(inplace=True, drop=True)
 
 # To remove stop words. Could have used nltk library but this is better.
+# First convert each entry to 'str' so if its not it does not cause problems later on and then convert into tokens
 df6['Tokens'] = df6["Title"].map(lambda d: str(d))
 df6['Tokens'] = df6["Title"].map(lambda d: tokenizer(d))
-df6.to_csv("tokens.csv")
-df6.read_csv("tokens.csv")
-df6 = df6.drop_duplicates(['Tokens'])
+# df6.to_csv("tokens.csv")
+# df6 = pd.read_csv("tokens.csv")
+# df6 = df6.drop_duplicates(['Tokens'])
 
 def main():
-    # First convert each entry to 'str' so if its not it does not cause problems later on and then convert into tokens
     
     vectorizer = TfidfVectorizer(min_df=5, analyzer='word', ngram_range=(1, 2), stop_words='english')
-    vz = vectorizer.fit_transform(list(df6['Tokens'].map(lambda tokens: ''.join(tokens))))
+    vz = vectorizer.fit_transform(list(df6['Tokens'].map(lambda tokens: ' '.join(tokens))))
     # idf = vectorizer.idf_
     # vocab = vectorizer.vocabulary_
     # res = dict((v,k) for k,v in vocab.items())
